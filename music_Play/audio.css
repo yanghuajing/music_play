@@ -1,0 +1,302 @@
+﻿/*第6单元 项目6-3 音乐播放器 css文件*/
+/*并排放置两个带边框的框时，可令边框和内边距包含在指定宽度和高度内，用来解决盒子被挤掉下去的问题。*/
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+	min-height: 100%;
+	background:white;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: 300;
+}
+a { color: #FFF; text-decoration: none; }
+a:hover { color: #26C5CB; }
+p { margin: 0; }
+
+#container, #player, .cover{/**/
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+#container {
+    width: 370px;
+    height: 370px;
+	/*background-color: red;*/
+    background: white;
+}
+/*实现光盘状态*/
+#player {
+  	 width: 300px;
+     height: 300px;
+     background: darkred;
+     border-radius: 50%;
+     overflow: hidden;
+	 /*box-shadow: 2px 2px 20px 0 rgba(0,0,0,0.3);*/
+	 z-index: 300;
+}
+/*!*专辑封面 *!*/
+img {
+  	width: 100%;
+    height: 100%;
+    background: red;
+    opacity: 0.75;/*!*透明度75%*!*/
+}
+
+/*!*播放按钮 *!*/
+.controls {
+	  position: relative;
+	  width: 100%;
+	  color: #fff;
+	  text-align: center;
+}
+
+button {
+	  margin: 5px;
+	  color: red;
+	  background: transparent;/*/*背景透明*/
+	  border: 0;
+	  outline: 0;
+	  cursor: pointer;
+	  text-align: center;
+	  text-shadow: 1px 1px 2px blue;
+	/*!*过渡：所有属性都改变 在0.3s内完成 以慢速开始和结束*!*/
+	  transition: all 0.3s ease-in-out;/*以慢速开始和结束的过渡效果*/
+	  -webkit-transition: all 0.3s ease-in-out;/*-webkit-transition：CSS属性(none|all|属性)  持续时间  时间函数  延迟时间*/
+}
+button:hover {
+	  color:green;
+}
+
+/*!* 歌曲信息*!*/
+.info {
+  	  position: relative;
+	  margin-top: 28px;
+	  bottom: 10px;
+	  color: #fff;
+	  text-align: center;
+	  text-shadow: 1px 1px 3px red;
+}
+.song {
+	  font-size: 18px;
+}
+.author {
+	  font-size: 14px;
+	  margin-bottom: -8px;
+}
+
+/*!*以下三个属性写在一起表示该元素超出内容宽度后显示为省略号 *!*/
+/*.song, .author{
+	  white-space: nowrap;
+	  !*overflow: hidden;*!
+	  text-overflow: ellipsis;
+}*/
+/*!* Volume音量控件的样式 *!*/
+input[type='range'] {
+	  display: block;
+	  margin: 14px auto;
+	  width: 80px;
+      height: 2px;
+	  outline: 0;
+	  cursor: pointer;
+	  box-shadow: 1px 1px 3px #000;
+}
+/*!*伪元素::-webkit-slider-thumb改变range的默认样式*!*/
+input[type='range']::-webkit-slider-thumb {
+     background: #AEAEAE;
+	 width: 6px;
+     height: 6px;
+	 border-radius: 50%;
+     transition: 0.1s all linear;
+	 -webkit-transition: 0.1s all linear;
+     -webkit-appearance: none !important;
+}
+/*!*鼠标悬停时，该元素背景颜色变为#26C5CB，放大为原来的2倍*!*/
+input[type='range']:hover::-webkit-slider-thumb {
+  	background: #26C5CB;
+	-webkit-transform:scale(2,3);
+}
+/*/*隐藏复选框*/
+input[type=checkbox] {
+	  position: absolute;
+	  top: -9999px;
+	  left: -9999px;
+}
+label {
+	  text-shadow: 1px 1px 3px #000;
+}
+.to-lyrics-label:hover {
+	  color: #26C5CB;
+}
+label.to-lyrics-label {
+	  position: absolute;
+	  top: 276px;
+	  left: 50%;
+	  width: 20px;
+	  height: 20px;
+	  margin-left: -5px;
+	  color: #fff;
+	  cursor: pointer;
+	  z-index: 500;
+}
+
+/*!* Lyrics *!*/
+.lyrics {
+	position: relative;
+	width: 100%;
+	height: 96px;
+	margin-top: 30px;
+	padding: 4px 24px;
+	color: #000;
+	background: rgba(255,255,255,0.3);
+	font-size: 12px;
+	text-align: center;
+	overflow-y: scroll;/*当内容超过div高度时，出现滚动条，内容滚动显示*/
+	/*display: none;*/
+	box-shadow: inset 0 -3px 5px 0 rgba(0,0,0,0.5);
+
+	transition: all 0.5s ease-in-out;
+	-webkit-transition: all 0.5s ease-in-out;
+}
+
+/*font-size
+box-shadow
+text-align
+font-wight*/
+
+/*!*当鼠标悬停在歌词时，背景变为白色80%透明*!*/
+.lyrics:hover {
+  	background: rgba(255,255,255,0.8);
+}
+
+/*!*清除滚动条样式*!*/
+.lyrics::-webkit-scrollbar {
+	  display: none;
+}
+
+.scroll {
+	color: #fff;
+	text-align: center;
+	font-size: 9px;
+	font-weight: bold;
+	text-shadow: 1px 1px 3px #000;
+}
+
+/*
+做光盘型音乐播发器；——》按钮、歌名/艺人、歌词位于光盘中
+body设置整体的样式：font-size、font-famliy、background
+一个大的div，用于整体div的位置；具有的css样式：位置（top、bottom、margin、position：absolution）
+小的div做成光盘型：width、height、border-radius；
+小的div中又包含了三个div：controls、info、lyrics；
+使用嵌套居中方式：用body作为父，通过div不断的嵌套下去；
+使用微调整，使三个div中的内容center；
+美观：
+1、使用缓速显示鼠标在控件上的css；
+2、阴影、透明
+*/
+
+
+.cover {
+	  padding-top: 145px;
+	  transition: all 0.5s ease-in-out;
+	  -webkit-transition: all 0.5s ease-in-out;
+}
+/*!*~ 用于选取属性值中包含指定词汇的元素*!*/
+#to-lyrics:checked ~ .cover {
+	  padding-top: 40px;
+}
+#to-lyrics:checked ~ .cover .lyrics {
+	  margin-top: 0px;
+}
+#to-lyrics:checked ~ .cover button {
+	  margin: 4px;
+}
+
+/*添加旋转盘片*/
+.play_needle {
+	background: url('play_needle.png') no-repeat;
+	width: 70px;
+	height: 120px;
+	display: inline-block;
+	z-index: 1000;
+	position: absolute;
+	background-size: 100% auto;
+	top: -60px;
+	left: 185px;
+	transform-origin: 0 0;
+	transform: rotate(-30deg);
+	transition:  all .6s;
+}
+
+.rotate {
+	animation: rotate 10s infinite linear;
+}
+
+.play_disc {
+	/*margin上下0  左右居中*/
+	margin: 0 auto 0;
+	width: 370px;
+	height: 370px;
+
+	/*backgroud-size 100% auto */
+	background: url('disc.png') center center no-repeat;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/*宽度100% 高度自适应*/
+	background-size: 100% auto;
+
+	padding: 0;
+	/*opacity: .1;*/
+	outline: 0;
+	z-index: 100;
+	border-radius: 50%
+}
+
+.stop {
+	animation-play-state:paused;
+}
+
+@keyframes rotate {
+	from {
+		transform:  rotate(0deg);
+	} to {
+		  transform:  rotate(360deg);
+	  }
+}
+
+/*心型*/
+/*#heart {*/
+	/*!*margin: 50px;*!*/
+	/*width: 10px;*/
+	/*height: 10px;*/
+	/*background: red;*/
+	/*position: relative;*/
+	/*transform: rotate(45deg);*/
+	/*z-index: 999;*/
+/*}*/
+/*#heart:before {*/
+	/*content: '';*/
+	/*width: 5px;*/
+	/*height: 10px;*/
+	/*position: absolute;*/
+	/*left: -49px;*/
+	/*top: 0;*/
+	/*background: red;*/
+	/*border-radius: 5px 0 0 5px;*/
+	/*z-index: 999;*/
+/*}*/
+/*#heart:after {*/
+	/*content: '';*/
+	/*width: 10px;*/
+	/*height: 5px;*/
+	/*position: absolute;*/
+	/*left: 0;*/
+	/*top: -49px;*/
+	/*background: red;*/
+	/*border-radius: 5px 5px 0 0;*/
+	/*z-index: 999;*/
+/*}*/
